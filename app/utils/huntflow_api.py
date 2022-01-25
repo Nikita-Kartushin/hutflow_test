@@ -16,9 +16,6 @@ class HuntFlowApi:
             response = await session.post(url, json=candidate, headers=headers)
             response = await response.json()
 
-        # response = requests.post(url=url, data=candidate, headers=headers)
-        # response = response.json()
-
         return response
 
     @classmethod
@@ -68,7 +65,7 @@ class HuntFlowApi:
             "vacancy": vacancy_id,
             "status": status,
             "comment": comment,
-            "files": [{'id': next(iter(files_ids))}],
+            "files": [{'id': next(iter(files_ids))}] if files_ids else None,
             "rejection_reason": None,
             "fill_quota": 0
         }
