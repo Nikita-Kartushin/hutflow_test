@@ -40,7 +40,7 @@ class CandidateLoader:
             comment = candidate.get('Комментарий')
             status = self._get_status_by_name(organization_id=organization_id, name=candidate.get('Статус'))
 
-            attach_candidate_response = await HuntFlowApi.add_recruits_to_vacancy(
+            await HuntFlowApi.add_recruits_to_vacancy(
                 status=status,
                 comment=comment,
                 vacancy_id=vacancy_id,
@@ -95,15 +95,3 @@ class CandidateLoader:
             if status.get('name') == name:
                 return status.get('id')
 
-
-async def main():
-    loader = CandidateLoader()
-    await loader.load(
-        path='/home/nikita/Downloads/Telegram Desktop/test/Тестовое задание/Тестовая база.xlsx',
-        n_row=0
-    )
-
-
-if __name__ == '__main__':
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(main())
